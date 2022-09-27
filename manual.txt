@@ -1,0 +1,18 @@
+Запуск сервера:
+    python manage.py runserver
+
+Создание приложения:
+    python manage.py startapp <Name>
+
+Внесение изменений в базу данных:
+    1.Изменить модели (вmodels.py).
+
+    2.python manage.py makemigrations, чтобы создать миграции для этих изменений
+    
+    3.python manage.py migrate, чтобы применить эти изменения к базе данных.
+
+Вызвать оболочку Python:
+    python manage.py shell
+
+Создание пользователя-администратора:
+    python manage.py createsuperuser
