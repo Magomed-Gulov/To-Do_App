@@ -1,0 +1,92 @@
+body {
+    margin: 0px;
+}
+
+div.wrap {
+    width: 80%;
+    margin: auto;
+}
+
+h1 {
+    width: 60%;
+    margin: 20px auto 20px auto;
+    text-align: center;
+    font-family: 'Inder';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    text-align: center;
+    color: #000000;
+}
+
+form.panel {
+    display: flex;
+    height: 30px;
+    width: auto;
+    justify-content: center;
+}
+
+#input {
+    width: 80%;
+    background: #FFF;
+    border: 3px solid #000;
+    border-radius: 10px 0px 0px 10px;
+}
+
+#button {
+    width: 20%;
+    color: #FFF;
+    background: #000000;
+    border: 0;
+    border-radius: 0px 10px 10px 0px;
+}
+
+ul {
+    padding: 0;
+    margin-top: 20px;
+    list-style: none;
+}
+
+li {
+    display: flex;
+    padding: 11px;
+    margin-bottom: 5px;
+    background: #F95656;
+    border-radius: 9px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+li span {
+    width: auto;
+    font-family: 'Inder';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+}
+
+li span.name {
+    width: 70%;
+    font-size: 14px;
+}
+
+li span.data {
+    width: 70%;
+    font-size: 10px;
+}
+
+li form input.status {
+    font-family: monospace;
+    border: 0;
+}
+
+li.status.True {
+    color: #3b9a33;
+    background-color: #64f956;
+}
+
+li.status.False {
+    color: #FFF;
+    background-color: #f95656;
+}

@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,6 +6,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Inder&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'todoapp/style.css' %}">
     <title>Document</title>
 </head>
 
@@ -12,22 +15,31 @@
 
 </body>
 
-<h1>My To Do List</h1>
-<!-- 
-<form action="/addTodoItem/" method="post">{% csrf_token %}
-    <input type="text" name="content">
-    <input type="submit" value="Add Todo Item">
-</form> -->
+<div class="wrap">
+    <h1>My To Do List</h1>
+
+    <div class="wrap">
+        <form class="panel" action="/addTodoItem/" method="post">{% csrf_token %}
+            <input id="input" type="text" name="content">
+            <input id="button" type="submit" value="Add">
+        </form>
 
 
-<!-- <ul>
-        {% for i in all_items %}
-        <li>{{i.content}}
-            <form action="/deleteTodoItem/{{i.id}}/" method="post">{% csrf_token %}
-                <input type="submit" value="Delete">
-            </form>
-        </li>
-        {% endfor %}
-    </ul> -->
+        <ul>
+            {% for i in all_items %}
+            <li class="status {{i.status}}">
+                <span class="name">{{i.content}}</span>
+                <form action="/action/status/{{i.id}}/" method="post">{% csrf_token %}
+                    <input class="status {{i.status}}" type="submit" value="Stat.">
+                </form>
+                <span class="data">{{i.pub_data}}</span>
+                <form action="/action/delete/{{i.id}}/" method="post">{% csrf_token %}
+                    <input class="status {{i.status}}" type="submit" value="Dele.">
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
 
 </html>
