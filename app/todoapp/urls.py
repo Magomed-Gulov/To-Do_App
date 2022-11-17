@@ -13,15 +13,16 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
+
 from django.urls import path, include
+from . import views
+from django.contrib.auth import login
 
 
+app_name = 'todoapp'
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('todoapp/', include('todoapp.urls'), name='todoapp'),
-    path('user/', include('users.urls'), name='user'),
-    # path('addTodoItem/',addTodoView),
-    # path('action/<str:te>/<int:i>/', actionTodoView),
+    path('', views.todoappView, name='index'),
+    path('addTodoItem/<str:email>/', views.addTodoView, name='addItem'),
+    path('action/<str:te>/<int:i>/', views.actionTodoView, name='action'),
     # path("accounts/", include("django.contrib.auth.urls"))#, {'template_name' : 'registration/login.html'})
 ]

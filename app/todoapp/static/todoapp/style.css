@@ -76,17 +76,21 @@ li span.data {
     font-size: 10px;
 }
 
-li form input.status {
+li a.status {
     font-family: monospace;
     border: 0;
 }
 
-li.status.True {
-    color: #3b9a33;
-    background-color: #64f956;
+.status.True {
+    color: #848484;
+    text-decoration: line-through;
+    /* text-decoration-style: wavy; */
+    text-decoration-color: #3f3f3f;
+    background-color: #c8c8c8;
 }
 
-li.status.False {
+.status.False {
     color: #FFF;
-    background-color: #f95656;
+    background-color: #8FC9FF;
+    text-decoration: none;
 }

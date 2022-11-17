@@ -1,6 +1,9 @@
+{% extends 'todoapp/base.html' %}
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
+{% block content %}
+
 
 <head>
     <meta charset="UTF-8">
@@ -8,38 +11,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Inder&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'todoapp/style.css' %}">
-    <title>Document</title>
+    <title>{% block title %}Home{% endblock %}</title>
 </head>
 
 <body>
 
-</body>
 
 <div class="wrap">
     <h1>My To Do List</h1>
 
     <div class="wrap">
-        <form class="panel" action="/addTodoItem/" method="post">{% csrf_token %}
-            <input id="input" type="text" name="content">
-            <input id="button" type="submit" value="Add">
-        </form>
+        {% if user.is_authenticated %}
+            <form class="panel" action="{% url 'todoapp:addItem' email=user.email %}" method="post">{% csrf_token %}
+                <input id="input" type="text" name="content">
+                <input id="button" type="submit" value="Add">
+                    {% comment %} <!--<input style="display: none" name="email" value="{{ user.email }}">--> {% endcomment %}
+            </form>
 
+            Hi {{ user.username }}! Email:  {{ user.email }}
+            <p><a href="{% url 'user:logout' %}?next={{ request.path }}">Log Out</a></p>
+        {% else %}
+            <p id="button">
+                <a href="{% url 'user:login' %}?next={{ request.path }}">Login.</a>
+            </p>
 
-        <ul>
-            {% for i in all_items %}
-            <li class="status {{i.status}}">
-                <span class="name">{{i.content}}</span>
-                <form action="/action/status/{{i.id}}/" method="post">{% csrf_token %}
-                    <input class="status {{i.status}}" type="submit" value="Stat.">
-                </form>
-                <span class="data">{{i.pub_data}}</span>
-                <form action="/action/delete/{{i.id}}/" method="post">{% csrf_token %}
-                    <input class="status {{i.status}}" type="submit" value="Dele.">
-                </form>
-            </li>
-            {% endfor %}
-        </ul>
+        {% comment %} {% if user.is_authenticated %} {% endcomment %}
+        {% comment %} {% else %}
+            <p>You are not logged in</p>
+            <a href="{% url 'user:login' %}">Log In</a> {% endcomment %}
+        {% endif %}
+
+        {% if user.is_authenticated %}
+            <ul>
+                {% for i in all_items %}
+                    {% if i.email == user.email %}
+                        <li class="status {{i.status}}">
+                            <span class="name">{{i.content}}</span>
+                            <a class="status {{i.status}}" href="{% url 'todoapp:action' te="status" i=i.id %}">Stat.</a>
+                            <a class="status {{i.status}}" href="{% url 'todoapp:action' te="delete" i=i.id %}">Dele.</a>
+                            
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+        
     </div>
 </div>
+
+</body>
+{% endblock %}
 
 </html>
